@@ -1,0 +1,41 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/public/css/style.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div class="boite">
+            <div class="boite_titre">
+                <h2>SalleRobot Eleve</h2>
+            </div>
+
+            @using (@Html.BeginForm("Index", "Eleve", FormMethod.Post))
+            {
+                <div class="boite_form">
+                    <div>
+                        <label for="Id_user">Utilisateur</label><br />
+                        <input type="text" id="Id_user" name="Id_user" class="intxt" />
+                    </div>
+
+                    <div>
+                        <label for="Psw">Mot de Passe</label><br />
+                        <input type="password" id="Psw" name="Psw" class="intxt" />
+                    </div>
+                    <h4 class="message">@ViewBag.message</h4>
+                    <input type="submit" value="Entrer" class="button" />
+                </div>
+            }
+
+        </div>
+    </div>
+</body>
+</html>

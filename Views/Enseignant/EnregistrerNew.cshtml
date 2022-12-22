@@ -1,0 +1,47 @@
+﻿@model formatif.Models.ModEnregistrerNew
+@{
+    Layout = null;
+    String Status="";
+    String Supervision = "";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>EnregistrementNew</title>
+</head>
+<body>
+    <div>
+        @using (@Html.BeginForm("EnregistrerNew", "Enseignant", FormMethod.Post))
+        {
+        <div class="boite_form">
+            <div>
+                <label for="Eleve_Id">Utilisateur</label><br />
+                <select name="Eleve_Id" class="intxt">
+                    @foreach (var item in Model.ListELeves)
+                    {                        
+                        <option value="@item.Eleve_Id">@item.Prenom @item.Nom</option>
+                    }
+
+                </select>
+
+            </div>
+
+            <div>
+                <label for="note">Mot de Passe</label><br />
+                <input type="text" id="note" name="Anotation" class="intxt" />
+            </div>
+            <input type="hidden" value="@Model.Jour" name="Jour" />
+            <input type="hidden" value="@Model.Hour" name="Hour" />
+            <input type="hidden" value="@Status" name="Status" />
+            <input type="hidden" value="@Supervision" name="Supervision" />
+            <h4 class="message">@ViewBag.message</h4>       
+            <input type="submit" value="Entrer" class="button" />
+       
+        </div>
+        }
+    </div>
+</body>
+</html>

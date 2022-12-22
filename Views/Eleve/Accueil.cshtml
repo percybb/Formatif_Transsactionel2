@@ -1,0 +1,98 @@
+﻿@model formatif.Models.ModAccueil
+@{
+    Layout = null;
+    bool flat = false;
+    String color = "";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Accueil</title>
+
+    <link href="~/public/css/style.css" rel="stylesheet" />
+</head>
+<body>
+    @Html.Partial("~/Views/Partiels/_menuEleve.cshtml", Model.nom_log)
+
+    <div class="container">
+        <h2>@ViewBag.message_titre</h2>
+        <table border="1">
+
+            <thead>
+                <tr>
+                    <td class="tdHeader">Hours</td>
+                    <td class="tdHeader">Lundi</td>
+                    <td class="tdHeader">Mardi</td>
+                    <td class="tdHeader">Mercredi</td>
+                    <td class="tdHeader">Jeudi</td>
+                    <td class="tdHeader">Vendredi</td>
+                </tr>
+            </thead>
+            <tbody>
+
+                @for (int i = 1; i < 9; i++)
+                {
+                    <tr>
+                        <td class="tdClass"> @i </td>
+                        @for (int j = 1; j < 6; j++)
+                        {
+                            flat = false;
+                    <td class="tdClass">
+
+                        @foreach (var item in Model.Reservations)
+                        {
+                            if ((item.Hour == @i) && (item.Jour == @j))
+                            {
+                                flat = true;
+                                if (item.Eleve_Id == Model.nom_log)
+                                {
+                                    <div class="linkH1">
+                                        
+                                        <h3>@item.Eleve_Id</h3>
+                                        
+                                        <a href="@Url.Action("DeleteReg", "Eleve", new { item.Reserva_Id })" >
+                                            <h3>Suprimer</h3>
+                                        </a>
+                                    </div>
+                                }
+                                else { 
+                                    
+                                    <div class="linkH2" >
+                                        <h3>Ocuppe</h3>
+                                    </div>
+                                
+                                }
+
+                            }
+                        }
+
+                        @if (flat == false)
+                        {
+                            <div class="linkH3">
+                                <a href="@Url.Action("EnregistrerNew", "Eleve", new { Jour = @j, hour = @i })" >
+                                    <h3>Enregitrer</h3>
+                                </a>
+                            </div>
+                            
+                        }
+                    </td>
+
+                        }
+                    </tr>
+                }
+
+
+            </tbody>
+
+
+
+
+        </table>
+
+
+    </div>
+</body>
+</html>

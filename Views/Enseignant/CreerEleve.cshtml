@@ -1,0 +1,130 @@
+﻿@model formatif.Models.ModCreerEleve
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>CreerEleve</title>
+
+    <link href="~/public/css/style.css" rel="stylesheet" />
+</head>
+<body>
+    @Html.Partial("~/Views/Partiels/_menu.cshtml", Model.nom_log)
+    <div class="container">
+
+        <div class="boite">
+            <div class="boite_titre">
+                <h2>INCRIPTION E-LEARNING</h2>
+            </div>
+
+            @using (@Html.BeginForm("CreerEleve", "Enseignant", FormMethod.Post))
+            {
+                <div class="boite_form">
+                    <div>
+                        <label for="Eleve_id">Utilisateur</label><br />
+                        <input type="text" id="Eleve_id" name="Eleve_id" class="intxt" value="@Model.DatEleve.Eleve_Id" required />
+                    </div>
+                    <div>
+                        <label for="nom">Nom</label><br />
+                        <input type="text" id="nom" name="Nom" class="intxt" value="@Model.DatEleve.Nom" required />
+                    </div>
+                    <div>
+                        <label for="prenom">Prenom</label><br />
+                        <input type="text" id="prenom" name="Prenom" class="intxt" value="@Model.DatEleve.Prenom" required />
+                    </div>
+                    <div>
+                        <label for="email">Couriel</label><br />
+                        <input type="email" id="email" name="Email" class="intxt" value="@Model.DatEleve.Email" required />
+                    </div>
+                    <div>
+                        <label for="Psw">Mot de passe</label><br />
+                        <input type="text" id="Psw" name="Psw" class="intxt" value="@Model.DatEleve.Psw" required />
+                    </div>
+                    <div>
+                        <label for="Status">Status</label><br />
+                        <select name="Status" value="@Model.DatEleve.Status" class="intxt">
+                            <option value="Active">Active</option>
+                            <option value="Suspendu">Suspendu</option>
+
+                        </select>
+
+                    </div>
+                    <div>
+                        <label for="Supervision">Supervision</label><br />
+                        <select name="Supervision" value="@Model.DatEleve.Supervision" class="intxt">
+                            <option value="Oui">Oui</option>
+                            <option value="Nom">Nom</option>
+                        </select>
+
+                    </div>
+
+
+                    <h4 class="message">@ViewBag.message</h4>
+                    <input type="submit" value="Entrer" class="button" />
+                </div>
+            }
+
+            <a href="/Login/Index" class="lien">Login</a>
+
+
+
+
+        </div>
+        <br />
+
+        <table border="1">
+            <thead>
+                <tr>
+                    <td class="tdHeader">Utilisateur</td>
+                    <td class="tdHeader">Nom</td>
+                    <td class="tdHeader">Prenom</td>
+                    <td class="tdHeader">Email</td>
+                    <td class="tdHeader">Photo</td>
+                    <td class="tdHeader">Status</td>
+                    <td class="tdHeader">Supervision</td>
+                    <td class="tdHeader">Actions</td>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model.ListEleves)
+                {
+                    <tr>
+                        <td class="tdClass1">
+                            @item.Eleve_Id
+                        </td>
+                        <td class="tdClass1">
+                            @item.Nom
+                        </td>
+                        <td class="tdClass1">
+                            @item.Prenom
+                        </td>
+                        <td class="tdClass1">
+                            @item.Email
+                        </td>
+                        <td class="tdClass1">
+                            N/A
+                        </td>
+                        <td class="tdClass1">
+                            @item.Status
+                        </td>
+                        <td class="tdClass1">
+                            @item.Supervision
+                        </td>
+                        <td>
+                            <a href="" class="button2"> Editer </a>
+                            <a href="" class="button2"> Message </a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,90 @@
+﻿@model formatif.Models.ModMessage2
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Message</title>
+    <link href="~/public/css/style.css" rel="stylesheet" />
+</head>
+<body>
+    @Html.Partial("~/Views/Partiels/_menuEleve.cshtml", Model.nom_log)
+
+    <div class="container2">
+
+        <div class="list_eleve">
+            <div>
+                <h4>List Enseignant</h4>
+                <ul>
+                    @foreach (var item in Model.LstEnseignant)
+                    {
+                        <li class="item_eleve"><a href="@Url.Action("Select_eleve", "Eleve", new { eleve = item.Ens_Id})"> @item.Ens_Id </a></li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+           
+
+        <div>
+            <div class="list_eleve">
+                @using (@Html.BeginForm("Message", "Eleve", FormMethod.Post))
+                {
+                    <div class="boite_form">
+                        <div>
+                            <label for="User_Id">Utilisateur</label>
+                            <h4 id="nom_eleve">@ViewBag.eleve</h4>
+                            <input type="hidden" value="@ViewBag.eleve" name="Eleve" />
+                        </div>
+
+                        <div>
+                            <label for="Msg">Message</label><br />
+                            <textarea id="Msg" name="Msg" cols="30" rows="3"></textarea>
+                        </div>
+                        <h4 class="message">@ViewBag.message</h4>
+                        <input type="submit" value="Entrer" class="button" @ViewBag.disable />
+
+
+                    </div>
+                }
+            </div>
+
+
+
+            <div class="container_msg">
+                <h3 align="center">Messages avec @ViewBag.eleve</h3>
+                @foreach (var item2 in Model.LstMessage)
+                {
+
+                    if (item2.Remite_Id == Model.nom_log)
+                    {
+                        <div align="right" class="msg_ligne ">
+                            <div class="msg_engeignant ">
+                                <h5> @item2.Date</h5>
+                                <p>@item2.Msg</p>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="msg_ligne ">
+                            <div class="msg_eleve ">
+                                <h5> @item2.Date</h5>
+                                <p>@item2.Msg</p>
+                            </div>
+                        </div>
+                    }
+
+                }
+            </div>
+        </div>
+
+     </div>
+
+
+</body>
+</html>

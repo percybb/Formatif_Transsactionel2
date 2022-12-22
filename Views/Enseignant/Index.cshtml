@@ -1,0 +1,43 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="~/Content/Site.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="container">
+        <div class="boite">
+            <div class="boite_titre">
+                <h2>SalleRobot Enseignant</h2>
+            </div>
+
+            @using (@Html.BeginForm("Index", "Enseignant", FormMethod.Post))
+            {
+                <div class="boite_form">
+                    <div>
+                        <label for="Id_user">Utilisateur</label><br />
+                        <input type="text" id="Id_user" name="Id_user" class="intxt" />
+                    </div>
+
+                    <div>
+                        <label for="Psw">Mot de Passe</label><br />
+                        <input type="password" id="Psw" name="Psw" class="intxt" />
+                    </div>
+                    <h4 class="message">@ViewBag.message</h4>
+                    <input type="submit" value="Entrer" class="button" />
+                </div>
+            } 
+
+        </div>
+    </div>
+
+</body>
+</html>
